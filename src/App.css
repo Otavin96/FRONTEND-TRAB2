@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Oswald-Bold";
+  src:
+    local("Oswald-Bold"),
+    url("../../assets/Fonts/Oswald-SemiBold.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: Oswald-Bold;
+  padding-top: 20px;
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.card-product {
+  width: 350px;
+  background-color: aqua;
+}
+
+.card-product h3 {
+  text-align: center;
+}
