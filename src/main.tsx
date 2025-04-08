@@ -1,11 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Navbar from "./components/Navbar/Navbar.tsx";
-import AppRoutes from "./Routes/Routes.tsx";
+import AppRoutes from "./Routes/AppRoutes.tsx";
+import AuthContext from "./Contexts/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    {/* <Navbar /> */}
-    <AppRoutes />
+    <AuthContext>
+      <AppRoutes />
+    </AuthContext>
   </StrictMode>
 );

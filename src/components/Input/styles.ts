@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 1.2rem;
+  font-size: 0.8;
   margin-bottom: 0.2rem;
 `;
 
@@ -16,7 +16,7 @@ export const Input = styled.input<{ hasError?: boolean }>`
   height: 35px;
   padding: 5px;
   width: 350px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
 

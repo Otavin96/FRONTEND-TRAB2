@@ -70,7 +70,7 @@ const Register = () => {
             <S.Info>Você sera redirecionado para a tela de login</S.Info>
           </S.Success>
         )}
-        <h1 className="text-4xl">Cadastre-se</h1>
+        <h1 className="text-3xl">Cadastre-se</h1>
         <Input
           className="placeholder:text-gray-500 placeholder:italic"
           {...register("cnpj")}

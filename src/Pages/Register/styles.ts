@@ -17,10 +17,11 @@ export const Success = styled.div`
 `;
 
 export const Register = styled.form`
+  padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 620px;
+  min-height: 580px;
   width: 500px;
   background-color: #fff;
   border-radius: 5px;
