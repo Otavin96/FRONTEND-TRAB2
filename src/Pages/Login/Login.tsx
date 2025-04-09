@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthType } from "../../features/Clients/types/ClientType";
 import { authenticateClient } from "../../services/clientService";
-import api from "../../services/api";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useContext } from "react";
 
@@ -31,23 +30,23 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
 
-  const {setAuth, setClient } = useContext(AuthContext)
+  const { setAuth, setClient } = useContext(AuthContext);
   const nav = useNavigate();
 
   const onSubmit = async (data: AuthType) => {
     try {
-      const {client, access_token} = await authenticateClient(data);
+      const { client, access_token } = await authenticateClient(data);
 
-      console.log(client, access_token)
+      console.log(client, access_token);
 
-      setAuth(true)
-      setClient(client)
+      setAuth(true);
+      setClient(client);
 
       localStorage.setItem("token", access_token);
       setValue("email", "");
       setValue("password", "");
 
-      nav("/dash");
+      nav("/");
     } catch (error) {
       console.error("Erro ao cadastrar o cliente", error);
     }

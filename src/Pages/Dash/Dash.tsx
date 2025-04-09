@@ -1,21 +1,28 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
-import * as S from './styles'
+import * as S from "./styles";
 
 function Dash() {
-
-  const {auth, setAuth, client } = useContext(AuthContext)
-
-  const Logout = () => {
-    setAuth(false);
-  }
+  const { client } = useContext(AuthContext);
 
   return (
-      <S.Container>
-        <S.Title>Teste</S.Title>
-        <p>Sejá bem vindo! {client.social_reason}</p>
-        <button onClick={() => Logout()}>Sair</button>
-      </S.Container>
+    <S.Container>
+      <S.Card>
+        <S.Title>Sejá bem vindo! {client.social_reason}</S.Title>
+      </S.Card>
+
+      <S.Card>
+        <S.Title>Sejá bem vindo! {client.social_reason}</S.Title>
+      </S.Card>
+
+      <S.Card>
+        <S.Title>Sejá bem vindo! {client.social_reason}</S.Title>
+      </S.Card>
+
+      <S.Card>
+        <S.Title>Sejá bem vindo! {client.social_reason}</S.Title>
+      </S.Card>
+    </S.Container>
   );
 }
 

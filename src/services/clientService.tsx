@@ -9,5 +9,6 @@ export const createClient = async (client: ClientType) => {
 
 export const authenticateClient = async (data: AuthType) => {
   const response = await api.post("client/authentication/", data);
-  return response.data[0];
+  console.log(response.data);
+  return response.data;
 };
