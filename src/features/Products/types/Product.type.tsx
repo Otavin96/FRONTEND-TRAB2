@@ -6,7 +6,7 @@ export type Category = {
   updatedAt: string;
 };
 
-export type Product = {
+export type ProductType = {
   id: string;
   name: string;
   sku: string;

@@ -1,4 +1,4 @@
-import { href, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./styles";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useContext, useEffect, useRef, useState } from "react";

@@ -17,6 +17,7 @@ export const Card = styled.div`
 `;
 
 export const Title = styled.h2`
+  background-color: #ccc;
   font-size: 1.2rem;
   text-align: center;
 `;
