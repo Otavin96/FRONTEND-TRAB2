@@ -6,6 +6,7 @@ import Register from "../Pages/Register/Register.tsx";
 import Dash from "../Pages/Dash/Dash.tsx";
 import LayoutWithNavbar from "../components/Navbar/LayoutWithNavbar.tsx"; // <- novo
 import ListProduct from "../features/Products/ListProduct/ListProduct.tsx";
+import PostProduct from "../features/Products/PostProduct/PostProduct.tsx";
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const { auth } = useContext(AuthContext);
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         >
           <Route path="/" element={<Dash />} />
           <Route path="/product/listar" element={<ListProduct />} />
+          <Route path="/product/cadastrar" element={<PostProduct />} />
         </Route>
 
         {/* Rotas públicas (sem Navbar) */}

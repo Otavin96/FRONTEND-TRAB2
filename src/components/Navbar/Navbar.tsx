@@ -45,7 +45,7 @@ const Navbar = () => {
           </S.ButtonDrop>
           <S.NavDrop>
             {openDropdown === "products" && (
-              <S.StyledLink to="/">
+              <S.StyledLink to="/product/cadastrar">
                 Cadastrar
                 <hr />
               </S.StyledLink>
