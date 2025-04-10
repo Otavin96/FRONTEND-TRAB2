@@ -20,15 +20,27 @@ const ListProduct = () => {
 
   return (
     <S.Container>
-      {products &&
+      
+          <table>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+            </tr>
+  
+            {products &&
         products.map((product) => (
-          <S.Card key={product.id}>
-            <S.Title>{product.name}</S.Title>
-            <p>{product.description}</p>
-            <p>{product.price}</p>
-            <p>{product.quantity}</p>
-          </S.Card>
-        ))}
+            <tr key={product.id}>
+              <td>{product.name}</td>
+            <td>{product.description}</td>
+            <td>{product.price}</td>
+            <td>{product.quantity}</td>
+            </tr>
+            ))}
+
+          </table>
+        
     </S.Container>
   );
 };

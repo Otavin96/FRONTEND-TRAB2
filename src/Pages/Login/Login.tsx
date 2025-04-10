@@ -37,12 +37,10 @@ const Login = () => {
     try {
       const { client, access_token } = await authenticateClient(data);
 
-      console.log(client, access_token);
-
       setAuth(true);
       setClient(client);
 
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("token", access_token.access_token);
       setValue("email", "");
       setValue("password", "");
 
