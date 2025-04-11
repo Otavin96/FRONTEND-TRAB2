@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import * as S from "./styles";
+import * as S from "../../Categories/ListCategory/styles";
 import { Category, ProductType } from "../types/Product.type";
 import { fetchProducts } from "../../../services/productService";
+import { formatter } from "../../../utils/formatter";
 
 const ListProduct = () => {
   const [products, setProducts] = useState<ProductType[]>();
@@ -20,27 +21,28 @@ const ListProduct = () => {
 
   return (
     <S.Container>
-      
-          <table>
-            <tr>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Preço</th>
-              <th>Quantidade</th>
-            </tr>
-  
-            {products &&
-        products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-            <td>{product.description}</td>
-            <td>{product.price}</td>
-            <td>{product.quantity}</td>
-            </tr>
-            ))}
+      <S.Table>
+        <S.Thead>
+          <S.Tr>
+            <S.Th>Nome</S.Th>
+            <S.Th>Descrição</S.Th>
+            <S.Th>Preço</S.Th>
+            <S.Th>Quantidade</S.Th>
+          </S.Tr>
+        </S.Thead>
 
-          </table>
-        
+        {products &&
+          products.map((product) => (
+            <S.Tbody>
+              <S.Tr key={product.id}>
+                <S.Td>{product.name}</S.Td>
+                <S.Td>{product.description}</S.Td>
+                <S.Td>{formatter.format(product.price)}</S.Td>
+                <S.Td>{product.quantity}</S.Td>
+              </S.Tr>
+            </S.Tbody>
+          ))}
+      </S.Table>
     </S.Container>
   );
 };

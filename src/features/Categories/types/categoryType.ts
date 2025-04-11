@@ -1,6 +1,7 @@
 export type CategoryType = {
-    name: string,
-    description: string,
-    createdAt: string,
-    updatedAt: string
-}
+  id?: string;
+  name: string;
+  description: string;
+  createdAt?: string;
+  updatedAt?: string;
+};

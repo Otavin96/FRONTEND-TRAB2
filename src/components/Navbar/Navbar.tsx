@@ -45,13 +45,13 @@ const Navbar = () => {
           </S.ButtonDrop>
           <S.NavDrop>
             {openDropdown === "products" && (
-              <S.StyledLink to="/product/cadastrar">
+              <S.StyledLink to="/produto/cadastrar">
                 Cadastrar
                 <hr />
               </S.StyledLink>
             )}
             {openDropdown === "products" && (
-              <S.StyledLink to="/product/listar">Listar</S.StyledLink>
+              <S.StyledLink to="/produto/listar">Listar</S.StyledLink>
             )}
           </S.NavDrop>
         </S.NavDropDown>
@@ -69,13 +69,13 @@ const Navbar = () => {
           </S.ButtonDrop>
           <S.NavDrop>
             {openDropdown === "categories" && (
-              <S.StyledLink to="/">
+              <S.StyledLink to="/categoria/cadastrar">
                 Cadastrar
                 <hr />
               </S.StyledLink>
             )}
             {openDropdown === "categories" && (
-              <S.StyledLink to="/">Listar</S.StyledLink>
+              <S.StyledLink to="/categoria/listar">Listar</S.StyledLink>
             )}
           </S.NavDrop>
         </S.NavDropDown>

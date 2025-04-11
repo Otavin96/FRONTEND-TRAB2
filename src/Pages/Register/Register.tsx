@@ -72,7 +72,6 @@ const Register = () => {
         )}
         <h1 className="text-3xl">Cadastre-se</h1>
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("cnpj")}
           type="text"
           placeholder="Digite seu CNPJ"
@@ -80,7 +79,6 @@ const Register = () => {
           helperText={errors.cnpj?.message}
         />
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("social_reason")}
           type="text"
           placeholder="Digite sua razão social"
@@ -88,7 +86,6 @@ const Register = () => {
           helperText={errors.social_reason?.message}
         />
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("email")}
           type="text"
           placeholder="Digite seu e-mail"
@@ -96,7 +93,6 @@ const Register = () => {
           helperText={errors.email?.message}
         />
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("password")}
           type="password"
           placeholder="Digite sua senha"
@@ -104,7 +100,6 @@ const Register = () => {
           helperText={errors.password?.message}
         />
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("confirmPassword")}
           type="password"
           placeholder="Confirme sua senha"
@@ -112,7 +107,6 @@ const Register = () => {
           helperText={errors.confirmPassword?.message}
         />
         <Input
-          className="placeholder:text-gray-500 placeholder:italic"
           {...register("phone")}
           type="text"
           placeholder="Digite seu telefone"

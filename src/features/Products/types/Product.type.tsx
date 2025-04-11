@@ -7,13 +7,13 @@ export type Category = {
 };
 
 export type ProductType = {
-  id: string;
+  id?: string;
   name: string;
-  sku: string;
+  sku?: string;
   description: string;
-  price: string; // ou number, depende se você quer converter
-  quantity: string; // ou number
-  createdAt: string;
-  updatedAt: string;
-  category_id: Category;
+  price: number; // ou number, depende se você quer converter
+  quantity: number; // ou number
+  createdAt?: string;
+  updatedAt?: string;
+  category_id: string;
 };

@@ -25,6 +25,7 @@ export const Input = styled.input<{ hasError?: boolean }>`
   }
 
   &::placeholder {
+    font-style: italic;
     padding-left: 5px;
   }
 
