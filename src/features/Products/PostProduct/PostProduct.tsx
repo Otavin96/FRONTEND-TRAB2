@@ -10,6 +10,7 @@ import { CategoryType } from "../../Categories/types/categoryType";
 import { Select } from "../../../components/Select/Select";
 import { createProduct } from "../../../services/productService";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const schema = z.object({
   name: z.string().min(1, "Campo é obrigatório"),
@@ -22,6 +23,8 @@ const schema = z.object({
 type FormProps = z.infer<typeof schema>;
 
 const PostProduct = () => {
+  const queryClient = useQueryClient();
+
   const [categories, setCategories] = useState<CategoryType[]>();
 
   const {
@@ -34,7 +37,6 @@ const PostProduct = () => {
     reValidateMode: "onChange",
     resolver: zodResolver(schema),
   });
-  const nav = useNavigate();
 
   useEffect(() => {
     try {
@@ -48,9 +50,23 @@ const PostProduct = () => {
     }
   }, []);
 
+  const { mutateAsync: createProductFn } = useMutation({
+    mutationFn: createProduct,
+    onSuccess(_, variables) {
+      queryClient.getQueryData(["products"]);
+
+      queryClient.setQueryData(["products"], (data) => {
+        const prev = (data as FormProps[]) || [];
+        return [...prev, { variables }];
+      });
+    },
+  });
+
+  const nav = useNavigate();
+
   const onSubmit = async (product: FormProps) => {
     try {
-      await createProduct(product);
+      await createProductFn(product);
 
       setValue("name", "");
       setValue("description", "");
@@ -69,49 +85,51 @@ const PostProduct = () => {
       <S.PostProduct onSubmit={handleSubmit(onSubmit)}>
         <S.Title>Cadastrar Produto</S.Title>
 
-        <Input
-          {...register("name")}
-          type="text"
-          placeholder="Digite o nome do produto"
-          label="Nome"
-          helperText={errors.name?.message}
-        />
-        <Input
-          {...register("description")}
-          type="text"
-          placeholder="Digite a descrição"
-          label="Descrição"
-          helperText={errors.description?.message}
-        />
-        <Input
-          {...register("price")}
-          type="number"
-          placeholder="Digite o valor"
-          label="Valor"
-          helperText={errors.price?.message}
-        />
-        <Input
-          {...register("quantity")}
-          type="number"
-          placeholder="Digite a quantidade"
-          label="Quantidade"
-          helperText={errors.quantity?.message}
-        />
+        <S.Form>
+          <Input
+            {...register("name")}
+            type="text"
+            placeholder="Digite o nome do produto"
+            label="Nome"
+            helperText={errors.name?.message}
+          />
+          <Input
+            {...register("description")}
+            type="text"
+            placeholder="Digite a descrição"
+            label="Descrição"
+            helperText={errors.description?.message}
+          />
+          <Input
+            {...register("price")}
+            type="number"
+            placeholder="Digite o valor"
+            label="Valor"
+            helperText={errors.price?.message}
+          />
+          <Input
+            {...register("quantity")}
+            type="number"
+            placeholder="Digite a quantidade"
+            label="Quantidade"
+            helperText={errors.quantity?.message}
+          />
 
-        <Select label="Categorias">
-          {categories &&
-            categories.map((category) => (
-              <option
-                {...register("category_id")}
-                key={category.id}
-                value={category.id}
-              >
-                {category.name}
-              </option>
-            ))}
-        </Select>
+          <Select label="Categorias">
+            {categories &&
+              categories.map((category) => (
+                <option
+                  {...register("category_id")}
+                  key={category.id}
+                  value={category.id}
+                >
+                  {category.name}
+                </option>
+              ))}
+          </Select>
 
-        <Button text="Cadastrar" type="submit" />
+          <Button text="Cadastrar" type="submit" />
+        </S.Form>
       </S.PostProduct>
     </S.Container>
   );

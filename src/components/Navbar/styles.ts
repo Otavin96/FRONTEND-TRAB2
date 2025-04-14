@@ -28,10 +28,12 @@ export const ButtonLogout = styled.button`
   justify-content: center;
   margin-right: 10px;
   color: #000;
+  height: 35px;
+  width: 100px;
   background-color: #fff;
   cursor: pointer;
-  width: 100px;
   border-radius: 5px;
+  font-size: 1.2rem;
 `;
 
 export const NavDropDown = styled.div`
@@ -43,10 +45,6 @@ export const NavDropDown = styled.div`
 export const StyledLink = styled(Link)`
   color: #fff;
   font-weight: bold;
-`;
-
-export const ButtonDrop = styled.button`
-  cursor: pointer;
 `;
 
 export const NavDrop = styled.div`

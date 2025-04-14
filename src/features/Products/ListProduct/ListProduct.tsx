@@ -1,48 +1,110 @@
-import { useEffect, useState } from "react";
 import * as S from "../../Categories/ListCategory/styles";
-import { Category, ProductType } from "../types/Product.type";
-import { fetchProducts } from "../../../services/productService";
-import { formatter } from "../../../utils/formatter";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  keepPreviousData,
+} from "@tanstack/react-query";
+import { Product, ProductResponse } from "../Interface/IProduct";
+import api from "../../../services/api";
+import Loading from "../../../components/Loading/Loading";
+import Pagination from "../../../components/Pagination/Pagination";
+import Search from "../../../components/Search/Search";
+import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
+import ProductTable from "./ProductTable";
 
 const ListProduct = () => {
-  const [products, setProducts] = useState<ProductType[]>();
+  const queryClient = useQueryClient();
+  const [queryParams] = useSearchParams();
+  const [sortDirParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    try {
-      const listProducts = async () => {
-        setProducts(await fetchProducts());
-      };
+  const [isModalDelete, setIsModalDelete] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedName, setSelectedName] = useState<string | null>(null);
 
-      listProducts();
-    } catch (error) {
-      console.error("Erro ao buscar os produtos no banco de dados", error);
-    }
-  }, []);
+  const per_page = queryParams.get("per_page")
+    ? Number(queryParams.get("per_page"))
+    : 5;
+
+  const page = queryParams.get("page") ? Number(queryParams.get("page")) : 1;
+
+  const sort_dir = sortDirParams.get("sort_dir")
+    ? sortDirParams.get("sort_dir")
+    : "asc";
+
+  const search = searchParams.get("filter") ? searchParams.get("filter") : "";
+
+  const { data: productsResponse, isLoading } = useQuery<ProductResponse>({
+    queryKey: ["products", page, per_page, sort_dir, search],
+    queryFn: async () => {
+      const response = await api.get(
+        `/product/?page=${page}&per_page=${per_page}&sort_dir=${sort_dir}&filter=${search}`
+      );
+      return response.data;
+    },
+    placeholderData: keepPreviousData,
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/product/${id}`);
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
+  const handleDeleteClick = (id: string, name: string) => {
+    setSelectedName(name);
+    setSelectedId(id);
+    setIsModalDelete(true);
+  };
+
+  const handleConfirmDelete = (id: string) => {
+    mutation.mutate(id);
+    setIsModalDelete(false);
+  };
+
+  const handleEditClick = (product: Product) => {
+    console.log("product", product);
+  };
 
   return (
     <S.Container>
-      <S.Table>
-        <S.Thead>
-          <S.Tr>
-            <S.Th>Nome</S.Th>
-            <S.Th>Descrição</S.Th>
-            <S.Th>Preço</S.Th>
-            <S.Th>Quantidade</S.Th>
-          </S.Tr>
-        </S.Thead>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {isModalDelete && selectedId && selectedName && (
+            <ConfirmationModal
+              setIsOpen={setIsModalDelete}
+              title="Atenção"
+              message={`Deseja realmente excluir o produto "${selectedName}"?`}
+              onConfirm={() => handleConfirmDelete(selectedId)}
+              confirmText="Excluir"
+              cancelText="Cancelar"
+            />
+          )}
 
-        {products &&
-          products.map((product) => (
-            <S.Tbody>
-              <S.Tr key={product.id}>
-                <S.Td>{product.name}</S.Td>
-                <S.Td>{product.description}</S.Td>
-                <S.Td>{formatter.format(product.price)}</S.Td>
-                <S.Td>{product.quantity}</S.Td>
-              </S.Tr>
-            </S.Tbody>
-          ))}
-      </S.Table>
+          <Search />
+          <ProductTable
+            products={productsResponse?.items || []}
+            onDelete={handleDeleteClick}
+            onEdit={handleEditClick}
+          />
+          {productsResponse && (
+            <Pagination
+              current_page={page}
+              last_page={productsResponse.last_page}
+              per_page={per_page}
+              total={productsResponse.total}
+            />
+          )}
+        </>
+      )}
     </S.Container>
   );
 };

@@ -32,17 +32,17 @@ const Navbar = () => {
   return (
     <S.Nav ref={menuRef}>
       <S.Navbar>
-        <Link to="/">Home</Link>
+        <S.StyledLink to="/">Home</S.StyledLink>
 
         {/* PRODUTOS */}
         <S.NavDropDown>
-          <S.ButtonDrop
+          <S.StyledLink
             onClick={() =>
               setOpenDropdown(openDropdown === "products" ? null : "products")
             }
           >
             Produtos
-          </S.ButtonDrop>
+          </S.StyledLink>
           <S.NavDrop>
             {openDropdown === "products" && (
               <S.StyledLink to="/produto/cadastrar">
@@ -58,7 +58,7 @@ const Navbar = () => {
 
         {/* CATEGORIAS */}
         <S.NavDropDown>
-          <S.ButtonDrop
+          <S.StyledLink
             onClick={() =>
               setOpenDropdown(
                 openDropdown === "categories" ? null : "categories"
@@ -66,7 +66,7 @@ const Navbar = () => {
             }
           >
             Categorias
-          </S.ButtonDrop>
+          </S.StyledLink>
           <S.NavDrop>
             {openDropdown === "categories" && (
               <S.StyledLink to="/categoria/cadastrar">

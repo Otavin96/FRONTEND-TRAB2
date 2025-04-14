@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 0.8;
+  font-size: 1.1rem;
   margin-bottom: 0.2rem;
 `;
 

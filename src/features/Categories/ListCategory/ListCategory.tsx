@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react";
 import * as S from "./styles";
-import { CategoryType } from "../types/categoryType";
 import { fetchCategories } from "../../../services/categoryService";
+import { useQuery } from "@tanstack/react-query";
 
 const ListCategory = () => {
-  const [categories, setCategories] = useState<CategoryType[]>();
-
-  useEffect(() => {
-    try {
-      const listCategories = async () => {
-        setCategories(await fetchCategories());
-      };
-
-      listCategories();
-    } catch (error) {
-      console.error("Erro ao buscar as categorias no banco de dados", error);
-    }
-  }, []);
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
   return (
     <S.Container>
