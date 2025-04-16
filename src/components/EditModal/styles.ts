@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../Button/Button";
 
 export const Modal = styled.div`
   width: 100%;
@@ -20,8 +21,8 @@ export const ModalContent = styled.div`
   width: 600px;
   height: 550px;
   min-height: 550px;
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  background-color: #fff;
   padding: 50px;
   border-radius: 20px;
 `;
@@ -38,3 +39,15 @@ export const ModalActions = styled.div`
 `;
 
 export const Title = styled.h2``;
+
+export const BtnEdit = styled(Button)`
+  width: 200px;
+`
+
+export const BtnCancel = styled(BtnEdit)`
+  background-color:rgb(201, 5, 5);
+
+  &:hover {
+    background-color:rgb(163, 0, 0);
+  }
+`

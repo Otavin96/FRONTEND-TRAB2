@@ -6,7 +6,7 @@ import { formatter } from "../../../utils/formatter";
 interface ProductRowProps {
   product: Product;
   onDelete: (id: string, name: string) => void;
-  onEdit: (product: Product) => void;
+  onEdit: (id: string) => void;
 }
 
 const ProductRow = ({ product, onDelete, onEdit }: ProductRowProps) => {
@@ -18,7 +18,7 @@ const ProductRow = ({ product, onDelete, onEdit }: ProductRowProps) => {
       <S.Td>{product.quantity}</S.Td>
       <S.Td>
         <S.Action>
-          <S.Btn onClick={() => product.id && product && onEdit(product)}>
+          <S.Btn onClick={() => product.id && product && onEdit(product.id)}>
             Editar
           </S.Btn>
           <S.BtnDel

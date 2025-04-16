@@ -9,6 +9,7 @@ import ListProduct from "../features/Products/ListProduct/ListProduct.tsx";
 import PostProduct from "../features/Products/PostProduct/PostProduct.tsx";
 import PostCategory from "../features/Categories/PostCategory/PostCategory.tsx";
 import ListCategory from "../features/Categories/ListCategory/ListCategory.tsx";
+import EditProduct from "../features/Products/EditProduct/EditProduct.tsx";
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const { auth } = useContext(AuthContext);
@@ -28,8 +29,11 @@ const AppRoutes = () => {
           }
         >
           <Route path="/" element={<Dash />} />
+          
           <Route path="/produto/listar" element={<ListProduct />} />
           <Route path="/produto/cadastrar" element={<PostProduct />} />
+          <Route path="/produto/edit" element={<EditProduct />} />
+
           <Route path="/categoria/cadastrar" element={<PostCategory />} />
           <Route path="/categoria/listar" element={<ListCategory />} />
         </Route>

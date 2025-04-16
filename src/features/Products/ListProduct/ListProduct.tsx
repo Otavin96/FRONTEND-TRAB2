@@ -7,13 +7,15 @@ import {
   useQueryClient,
   keepPreviousData,
 } from "@tanstack/react-query";
-import { Product, ProductResponse } from "../Interface/IProduct";
+import { ProductResponse } from "../Interface/IProduct";
 import api from "../../../services/api";
 import Loading from "../../../components/Loading/Loading";
 import Pagination from "../../../components/Pagination/Pagination";
 import Search from "../../../components/Search/Search";
 import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
 import ProductTable from "./ProductTable";
+import EditModal from "../../../components/EditModal/EditModal";
+import EditProduct from "../EditProduct/EditProduct";
 
 const ListProduct = () => {
   const queryClient = useQueryClient();
@@ -24,6 +26,8 @@ const ListProduct = () => {
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedName, setSelectedName] = useState<string | null>(null);
+
+  const [isModalEdit, setIsModalEdit] = useState(false);
 
   const per_page = queryParams.get("per_page")
     ? Number(queryParams.get("per_page"))
@@ -68,8 +72,9 @@ const ListProduct = () => {
     setIsModalDelete(false);
   };
 
-  const handleEditClick = (product: Product) => {
-    console.log("product", product);
+  const handleEditClick = (id: string) => {
+    setSelectedId(id)
+    setIsModalEdit(true)
   };
 
   return (
@@ -88,6 +93,14 @@ const ListProduct = () => {
               cancelText="Cancelar"
             />
           )}
+
+          {isModalEdit && (
+            <EditModal setIsOpen={setIsModalEdit} title="Editar Produto" confirmText="Editar" cancelText="Cancelar">
+              <EditProduct id={selectedId}/>
+            </EditModal>
+          )
+
+          }
 
           <Search />
           <ProductTable

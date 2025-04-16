@@ -1,12 +1,12 @@
 // src/pages/Products/ListProduct/ProductTable.tsx
 import ProductRow from "./ProductRow";
 import * as S from "../../Categories/ListCategory/styles";
-import { Product, ProductResponse } from "../Interface/IProduct";
+import { ProductResponse } from "../Interface/IProduct";
 
 interface ProductTableProps {
   products: ProductResponse["items"];
   onDelete: (id: string, name: string) => void;
-  onEdit: (product: Product) => void;
+  onEdit: (id: string) => void;
 }
 
 const ProductTable = ({ products, onDelete, onEdit }: ProductTableProps) => {
